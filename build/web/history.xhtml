@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SupHouseHold - Best Store</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <link href="resources/css/general.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <div id="header">
+            <div class="container">
+                <div id="logo">
+                    <a href=""><img src="resources/images/logo.png" alt=""/></a>
+
+                </div>
+                <div id="nav">
+                    <h:form style="display: inline">
+                        <h:commandLink value="Home" action="index.xhtml" />                        
+                        <c:if test="#{not empty username}">
+                            <h:commandLink value="#{username}" action="profile.xhtml" />
+                            <h:commandLink value="History" action="history.xhtml" />
+                            <h:commandLink value="Logout" action="#{userBean.logout}" />
+                        </c:if>
+                        <c:if test="#{empty username}">
+                            <h:commandLink value="Login" action="login.xhtml" />
+                            <h:commandLink value="SignIn" action="register.xhtml" />
+                        </c:if>
+
+                    </h:form>
+
+                </div>
+
+                <div id="cart">
+
+                    <a href="cart.xhtml"><img src="resources/images/cart.png" alt=""/></a>
+                    <span>#{productBean.cartList.size()}</span>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center;"><h1>My command's history</h1></div>
+
+        <div id="content">
+
+            <div id="company">
+                <h3 style="margin-bottom: 0px;color: #1e9ac3">WebSite statistics :</h3>
+                - - - - - - - - - - - - - - - - -
+                <span>Users Number : <b>#{productBean.usersNumber}</b></span><br/>
+                <span>Products Number : <b> #{productBean.productsList.size()}</b></span><br/><br/>
+                <img src="resources/images/banner.jpg" style="width: 160px !important;height: 600px !important;margin-top: 30px" />
+            </div>
+
+            <div id="products">
+                
+                <f:view>
+
+
+                    <h:form>
+                        <p:dataTable value="#{userBean.userCommandList}" var="item" rows="15"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="15,20,25">
+                                                        <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date"/>
+                                </f:facet>
+                                <h:outputText value="#{item.date}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Price"/>
+                                </f:facet>
+                                <h:outputText value="#{item.price} €"/>
+                            </p:column>
+                            
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+
+
+
+
+
+            </div>
+        </div>
+        <div id="footer">
+            <div class="container">
+                <p>All rights reserved &copy; SupHouseHold 2018</p>
+
+            </div>
+        </div>
+
+        <script src="resources/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script>
+
+
+        </script>
+    </h:body>
+</html>
+

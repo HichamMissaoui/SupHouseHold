@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SupHouseHold - Best Store</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <link href="resources/css/general.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <div id="header">
+            <div class="container">
+                <div id="logo">
+                    <a href="index.xhtml"><img src="resources/images/logo.png" alt=""/></a>
+
+                </div>
+                <div id="nav">
+                    <h:form style="display: inline">
+                        <h:commandLink value="Home" action="index.xhtml" />                        
+                        <c:if test="#{not empty username}">
+                            <h:commandLink value="#{username}" action="profile.xhtml" />
+                            <h:commandLink value="History" action="history.xhtml" />
+                            <h:commandLink value="Logout" action="#{userBean.logout}" />
+                        </c:if>
+                        <c:if test="#{empty username}">
+                            <h:commandLink value="Login" action="login.xhtml" />
+                            <h:commandLink value="SignIn" action="register.xhtml" />
+                        </c:if>
+
+                    </h:form>
+
+                </div>
+
+                <div id="cart">
+
+                    <a href="cart.xhtml"><img src="resources/images/cart.png" alt=""/></a>
+                    <span>#{productBean.cartList.size()}</span>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="profile">
+                <div id="userProducts">
+                    <a href="index.xhtml" style="text-decoration: none">
+                        <input type="button" value="Go back" class="btn1" style="display: inline !important;margin-bottom: 20px"  />
+                    </a>
+
+
+                    <img src="#{productBean.selectedProduct.picture}" style="width: 500px;height:500px;margin-top: 0%"/>
+                    <div style="margin-top: 50px">
+
+
+                    </div>
+
+                </div>
+                <div id="userInfos">
+                    <h2 style="margin-left: 25%">Product informations </h2>
+                    <!--< <form action="" method="post"> -->
+                    <h:form>
+                        <label>Name :</label><br/>
+                        <input type="text" class="input" value="#{productBean.selectedProduct.name}" name="name" disabled="true" />
+                        <label>Price :</label><br/>
+                        <input type="text" class="input" value="#{productBean.selectedProduct.price} EURO" name="price" disabled="true"/>
+                        <label>Description :</label><br/>
+                        <textarea style="margin-bottom: 20px" rows="6" cols="65"   name="description" disabled="true">#{productBean.selectedProduct.description}</textarea>                             
+                        <p:commandButton value="Add to Cart" styleClass="ui-priority-primary"  action="#{productBean.addToCart()}" ajax="false"/> 
+
+                    </h:form>
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div id="footer">
+            <div class="container">
+                <p>All rights reserved &copy; SupHouseHold 2018</p>
+
+            </div>
+        </div>
+
+        <script src="resources/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+        <script>
+
+
+        </script>
+    </h:body>
+</html>
+

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SupHouseHold - Best Store</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <link href="resources/css/general.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <c:if test="#{not empty username}">
+            <span style="color: red;font-size: 18px"> You are logged , you can't access to this page !</span><br/>
+            <a href="index.xhtml">Back to home page</a>
+        </c:if>
+        <c:if test="#{empty username}">
+
+            <div id="header">
+                <div class="container">
+                    <div id="logo">
+                        <a href="index.xhtml"><img src="resources/images/logo.png" alt=""/></a>
+
+                    </div>
+                    <div id="nav">
+                        <h:form style="display: inline">
+                            <h:commandLink value="Home" action="index.xhtml" />                        
+                            <h:commandLink value="Login" action="login.xhtml" />
+                            <h:commandLink value="SignIn" action="register.xhtml" />
+
+                        </h:form>
+
+                    </div>
+
+                    <div id="cart">
+
+                        <a href="cart.xhtml"><img src="resources/images/cart.png" alt=""/></a>
+                        <span>#{productBean.cartList.size()}</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <h1>Login Form</h1>
+                <p>Please fill in this form to login.</p>
+            </div>
+
+
+            <div id="content">
+
+                <div id="company">
+                    <h3 style="margin-bottom: 0px;color: #1e9ac3">WebSite statistics :</h3>
+                    - - - - - - - - - - - - - - - - -
+                    <span>Users Number : <b>#{productBean.usersNumber}</b></span><br/>
+                    <span>Products Number : <b> #{productBean.productsList.size()}</b></span><br/><br/>
+                    <img src="resources/images/banner.jpg" style="width: 160px !important;height: 600px !important;margin-top: 30px" />
+                </div>
+
+                <div  style="height: 300px;width: 400px;margin-left: 16%">
+
+
+
+                    <h:form>      
+                        <h:panelGrid id="grid" cellpadding="5" columns="2" style="margin-bottom:10px">
+                            <f:facet name="header">
+                                <p:messages id="message" />
+                            </f:facet>
+
+                            <p:outputLabel for="username" value="Username:" />
+                            <p:inputText id="username" value="#{userBean.user.username}" required="true"  />
+
+                            <p:outputLabel for="password" value="Password:" />
+                            <p:inputText id="password" value="#{userBean.user.password}" required="true" type="password"  />
+
+                            <p:commandButton value="Login" styleClass="ui-priority-primary"  action="#{userBean.login()}" ajax="false"/>
+                        </h:panelGrid>
+                    </h:form>
+                    <span style="color: red">#{userBean.loginErrorMessage}</span>
+
+                </div>
+            </div>
+            <div id="footer">
+                <div class="container">
+                    <p>All rights reserved &copy; SupHouseHold 2018</p>
+
+                </div>
+            </div>
+
+            <script src="resources/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+            <script>
+
+
+            </script>
+        </c:if>
+    </h:body>
+</html>
+
